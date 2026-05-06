@@ -63,8 +63,6 @@ public class Principal {
       task0.join();
       task1.join();
 
-      resetControlVariables();
-
       occurrences.putIfAbsent(sharedData, 0);
       occurrences.put(sharedData, occurrences.get(sharedData) + 1);
     }
@@ -72,12 +70,6 @@ public class Principal {
     for (int k : occurrences.keySet()) {
       System.out.printf("Key: %d | Occurrences: %d%n", k, occurrences.get(k));
     }
-  }
-
-  public static void resetControlVariables() {
-    lockVariable = false;
-    turn = 0;
-    interested = new boolean[2];
   }
 
   public static void enterRegion(Task task) {
