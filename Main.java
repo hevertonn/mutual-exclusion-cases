@@ -22,7 +22,7 @@ enum MutualExclusionType {
   NONE
 }
 
-public class Principal {
+public class Main {
   // ######################################################
   // ###################### SETTINGS ######################
   // ######################################################
@@ -33,17 +33,17 @@ public class Principal {
   // Set how many times the for loop will repeat.
   public static final int numberOfIterations = 100;
 
-  // Set to true to sleep for 1 milisecond in critical region.
+  // Set to true to sleep for 1 millisecond in the critical region.
   public static final boolean sleepInCriticalRegion = false;
 
   // #######################################################
   // #######################################################
   // #######################################################
 
-  // Shared Variable.
+  // Shared variable.
   public static int sharedData;
 
-  // Mutual Exclusion control variables.
+  // Mutual exclusion control variables.
   public static boolean lockVariable = false;
   public static int turn = 0;
   public static boolean[] interested = new boolean[2];
@@ -151,18 +151,19 @@ class Task0 extends Thread {
 
   @Override
   public void run() {
-    Principal.enterRegion(thisTask);
-    Principal.sharedData++;
+    Main.enterRegion(thisTask);
+    Main.sharedData++;
 
-    if (Principal.sleepInCriticalRegion) {
+    if (Main.sleepInCriticalRegion) {
       try {
         Thread.sleep(1);
       } catch (InterruptedException ie) {
+        System.out.println(ie.toString());
         return;
       }
     }
 
-    Principal.leaveRegion(thisTask);
+    Main.leaveRegion(thisTask);
   }
 }
 
@@ -171,17 +172,18 @@ class Task1 extends Thread {
 
   @Override
   public void run() {
-    Principal.enterRegion(thisTask);
-    Principal.sharedData--;
+    Main.enterRegion(thisTask);
+    Main.sharedData--;
 
-    if (Principal.sleepInCriticalRegion) {
+    if (Main.sleepInCriticalRegion) {
       try {
         Thread.sleep(1);
       } catch (InterruptedException ie) {
+        System.out.println(ie.toString());
         return;
       }
     }
 
-    Principal.leaveRegion(thisTask);
+    Main.leaveRegion(thisTask);
   }
 }
