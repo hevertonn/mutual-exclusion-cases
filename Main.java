@@ -81,7 +81,7 @@ public class Main {
         enterWithStrictAlternation(task);
         break;
       case PETERSON_SOLUTION:
-        enterWithPetersonMethod(task);
+        enterWithPetersonSolution(task);
         break;
       default:
         break;
@@ -97,7 +97,7 @@ public class Main {
         leaveWithStrictAlternation(task);
         break;
       case PETERSON_SOLUTION:
-        leaveWithPetersonMethod(task);
+        leaveWithPetersonSolution(task);
         break;
       default:
         break;
@@ -120,19 +120,17 @@ public class Main {
   }
 
   public static void leaveWithStrictAlternation(Task task) {
-    if (task.getId() == turn) {
-      switch (task) {
-        case TASK0:
-          turn = Task.TASK1.getId();
-          break;
-        case TASK1:
-          turn = Task.TASK0.getId();
-          break;
-      }
+    switch (task) {
+      case TASK0:
+        turn = Task.TASK1.getId();
+        break;
+      case TASK1:
+        turn = Task.TASK0.getId();
+        break;
     }
   }
 
-  public static void enterWithPetersonMethod(Task task) {
+  public static void enterWithPetersonSolution(Task task) {
     int other = 1 - task.getId();
     interested[task.getId()] = true;
     turn = task.getId();
@@ -141,7 +139,7 @@ public class Main {
     }
   }
 
-  public static void leaveWithPetersonMethod(Task task) {
+  public static void leaveWithPetersonSolution(Task task) {
     interested[task.getId()] = false;
   }
 }
